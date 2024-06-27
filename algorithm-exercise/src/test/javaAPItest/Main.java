@@ -1,5 +1,8 @@
 package test.javaAPItest;
 
+import org.junit.Test;
+
+import java.sql.SQLOutput;
 import java.util.Arrays;
 
 /**
@@ -84,6 +87,21 @@ public class Main {
          */
 
 
+
+
+    }
+    @Test
+    public void test() {
+        //自定义排序
+        int[][] test1 = new int[][] {{1,2,3},{2,3,4},{4,5,1},{4,6,5}, {4,1,7}};
+        Arrays.sort(test1, (a, b) -> a[2] - b[2]);
+        for (int i = 0; i < test1.length; i++) {
+            for (int j = 0; j < 3; j++) {
+                System.out.print(test1[i][j]);
+
+            }
+            System.out.print(" ");
+        }
     }
 }
 

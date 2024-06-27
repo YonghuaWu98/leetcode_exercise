@@ -124,10 +124,89 @@
 
     存各种图都很适合，但不能快速查询一条边是否存在，也不能方便地对一个点的出边进行排序。
     
-    优点是边是带编号的，有时会非常有用，而且如果 cnt 的初始值为奇数，存双向边时 i ^ 1 即是 i 的反边（常用于网络流）。  
+    优点是边是带编号的，有时会非常有用，而且如果 cnt 的初始值为奇数，存双向边时 i ^ 1 即是 i 的反边（常用于网络流）。 
+     
     
 ## 图的应用
-
+#### 深度优先搜索（DFS)
+1. 应用场景：查询（强）连通分量的个数
+2. 代码模板： 
+```java
+    //建图
+    //采用邻接表建图, n为图中结点个数
+    List<Integer>[] g = new ArrayList[n];
+    //初始化
+    Arrays.setAll(g, new ArrayList<>());
+    for (int[] e : 边数组) {
+        int x = e[0];
+        int y = e[1];
+        //无向边
+        g[x].add(y);
+        g[y].add(x);
+        //有向边
+        g[x].add(y);
+    }
+    // visited数组用于记录访问过的结点
+    boolean[] visited = new boolean[n];
+    int ans = 0;
+    for (int i = 0; i < n; i++) {
+        if (!visited[i]) {
+            dfs(i, g, visited);
+            ans += 1; //统计连通分量的个数
+        }       
+    }   
+    //dfs函数主体部分
+    public void dfs(int cur, List<Integer> g, boolean[] visited) {
+        
+        for (int e : g[i]) {
+            if (!visited[e]) {
+                visited[i] = true; //表示结点已经访问过
+                dfs(e, g, visited);
+            }
+            
+        }
+    }
+    
+```
+#### 广度优先搜索(BFS)
+1. 应用场景: 最短路径（权重统一，例如都为1）
+2. 代码模板：
+```java
+    //通常用于求两结点之间的最短路径，不同题型有相应的变化
+    //建图过程与DFS相似
+    List<Integer>[] g = new ArrayList[n];
+    //初始化
+    Arrays.setAll(g, e -> new ArrayList<>());
+    for (int[] e : 边数组) {
+        int x = e[0];
+        int y = e[1];
+        //无向边
+        g[x].add(y);
+        g[y].add(x);
+        //有向边
+        g[x].add(y);
+    }
+    // visited数组用于记录访问过的结点
+    boolean[] visited = new boolean[n];
+    // 利用队列的先进先出进行广度搜索
+    Deque<Integer> q = new DequeArray<>();
+    q.offer(0);//让起始结点入队
+    visited[0] = true;
+    int ans = 0;//当前距离
+    while(!q.isEmpty()) {
+        for (int i = 0; i < q.size(); i++) {
+            int cur = q.poll();
+            //当前结点访问过
+            visited[cur] = true;
+            for (int x : g[cur]) {
+                if (!visited[x]) {
+                    q.offer(x);
+                }   
+            }        
+        }
+        ans++;
+    }
+```
 #### 最小生成树
 
 

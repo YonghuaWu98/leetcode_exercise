@@ -1,5 +1,7 @@
 package test.javaAPItest;
 
+import org.junit.Test;
+
 import java.util.*;
 
 public class StringTest {
@@ -94,4 +96,23 @@ public class StringTest {
 //        int n = in.nextInt(), m = in.nextInt();
 //
 //    }
+
+    @Test
+    public void test() {
+        //测试结论：双重循环需要两个break才能全部停下
+        boolean flag = false;
+        for (int i = 0; i < 5; i++) {
+            if (flag) break;
+            for (int j = 0; j < 5; j++) {
+                System.out.println(i * j);
+                if (i * j == 2) {
+                    flag = true;
+                    break;
+                }
+            }
+        }
+    }
 }
+
+
+

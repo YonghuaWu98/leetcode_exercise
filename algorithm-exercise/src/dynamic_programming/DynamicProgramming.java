@@ -394,4 +394,43 @@ public class DynamicProgramming {
         return res;
     }
     // todo 分治法
+
+
+    //编辑距离
+    static int[][] cache; //保存计算的结果给
+    public int minDistance(String word1, String word2) {
+
+        //确定dp[i][j]的意义, word1前 i 个字符包含 word2前 j 个字符的最少操纵数
+
+        int n = word1.length(), m = word2.length();
+
+        //操作与不操作的问题
+        //s[i] == t[j], 不操作, 问题变成 i - 1, j - 1 的规模 dp[i][j] = dp[i - 1][j - 1]
+        //s[i] != t[j]，操作有三种情况 要么删除要么插入要么替换
+        //删除 s[i], 则问题变成 word1[i - 1] 和 word2[j] 的子问题
+        //插入 t[j], 这时候s[i] == t[j], 问题关键则为 s[0-i](因为s插入了一个)包含t[0,j - 1]的最小操作次数
+        //替换 s[i], 此时s[i] == t[j], 问题关键则回到 s[0 - (i - 1)] 和 t[0 - (j - 1)]了
+        //综上， dp[i][j] = dp[i - 1][j - 1]  s[i] = t[j]
+        //dp[i][j] = Math.min(dp[i - 1][j - 1], dp[i - 1][j], dp[i][j - 1]) + 1
+
+        //暴力递归 + 保存计算结果 = 记忆化搜索
+        cache = new int[n][m];
+        //初始化，-1 代表未搜索过
+        for (int i = 0; i < n; i++) {
+            Arrays.fill(cache[i], -1);
+        }
+        return dfs(word1, word2, n - 1, m - 1);
+    }
+    int dfs(String s, String t, int x, int y) {
+        if (x < 0) return y + 1;//为空则返回 y + 1（加一是因为j为下标）, 其中一个字符串多出来的字符
+        if (y < 0) return x + 1;
+        if (cache[x][y] != -1) return cache[x][y];
+        if (s.charAt(x) == t.charAt(y)) return cache[x][y] = dfs(s, t, x - 1, y - 1);
+        else return cache[x][y] = Math.min(Math.min(dfs(s, t, x - 1, y), dfs(s, t, x, y - 1)), dfs(s, t, x - 1, y - 1)) + 1;
+    }
+
+    //编辑距离
+    //递推
+
+
 }
