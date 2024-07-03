@@ -84,4 +84,49 @@ public class SortTest {
         }
         return 0;
     }
+
+    private boolean[] visited;
+    private int[][] memo;
+    public int maximalPathQuality(int[] values, int[][] edges, int maxTime) {
+        int n = values.length;
+        int[][] g = new int[n][n];
+        for (int[] e: edges) {
+            int x = e[0];
+            int y = e[1];
+            g[x][y] = e[2];
+            g[y][x] = e[2];
+        }
+        //记录哪些节点能够在 maxTime 到达
+        visited = new boolean[n];
+        //记录能够到达的节点的时间和路径价值
+        memo = new int[n][2];
+        // 0 节点到 0 节点的时间为 0 ，路径价值为 values[0]
+        memo[0][1] = values[0];
+        dfs(g, values, maxTime, 0, 0, values[0]);
+        return  0;
+    }
+    /**
+     *
+     *
+     */
+    void dfs(int[][] g, int[] values, int maxTime, int x, int time, int value) {
+        if (visited[x]) return;
+        if (time * 2 > maxTime) return ;
+
+        memo[x][0] = time;
+        memo[x][1] = value;
+        visited[x] = true;
+        for (int i = 0; i < values.length; i++) {
+            if (g[x][i] == 0) continue;
+            time += g[x][i];
+            value += values[i];
+            dfs(g, values, maxTime, i, time, value);
+        }
+    }
+    @Test
+    public void testMaximalPathQuality() {
+        int[] values = {0, 32, 10, 43};
+        int[][] edges = {{0,1,10},{1,2,15},{0,3,10}};
+        int maxTime = 49;
+    }
 }

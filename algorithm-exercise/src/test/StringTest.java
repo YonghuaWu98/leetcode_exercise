@@ -66,8 +66,9 @@ public class StringTest {
 //        s6 = s5;
 //        System.out.println(s6 == s5);
 
-
-        longestPalindrome("cbbd");
+//        String s = "null";
+//        System.out.println(s.isEmpty());
+//        longestPalindrome("cbbd");
 
 
     }
