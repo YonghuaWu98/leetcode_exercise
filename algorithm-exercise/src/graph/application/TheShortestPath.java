@@ -25,7 +25,7 @@ public class TheShortestPath {
      * 递归打印最短路径
      */
     public void pathPrint(int u, int v) {
-        if (path[u][v] == -1) System.out.println(u + "——" + v);
+        if (path[u][v] == -1) System.out.println(u + "——>" + v);
         pathPrint(u, path[u][v]);
         pathPrint(path[u][v], v);
     }
