@@ -1,6 +1,5 @@
 package test;
 import java.util.Arrays;
-import java.util.Arrays;
 
 /**
  * @Description TODO
@@ -52,6 +51,7 @@ public class Test {
             this.team = team;
         }
     }
+
 class Demo01 {
     public static void main(String[] args) {
         //final修饰数组变量，数组是引用变量

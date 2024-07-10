@@ -1,4 +1,4 @@
-package test;
+package test.javaAPItest;
 
 import java.util.Arrays;
 import java.util.HashMap;

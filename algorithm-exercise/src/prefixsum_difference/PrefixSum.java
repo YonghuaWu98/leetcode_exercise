@@ -12,15 +12,19 @@ import java.util.Scanner;
 public class PrefixSum {
     //洛谷 Subsequences Summing to Sevens S
     public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
-        int N = in.nextInt();
-        int[] nums = new int[N];
-        for (int i = 0; i < N; i++) {
-            nums[i] = in.nextInt();
-            in.nextLine();
-        }
-        int maxLen = PrefixSum.subsequencesSummingToSevensSum(nums);
-        System.out.println(maxLen);
+//        Scanner in = new Scanner(System.in);
+//        int N = in.nextInt();
+//        int[] nums = new int[N];
+//        for (int i = 0; i < N; i++) {
+//            nums[i] = in.nextInt();
+//            in.nextLine();
+//        }
+//        int maxLen = PrefixSum.subsequencesSummingToSevensSum(nums);
+//        System.out.println(maxLen);
+        String s = "a";
+        String ss = "c";
+        System.out.println(s.compareTo(ss));
+
     }
 
     public static int subsequencesSummingToSevensSum(int[] nums) {

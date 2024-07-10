@@ -44,6 +44,8 @@ public class Search {
         int idx2 = binarySearch2(arr, 5);
         System.out.println(idx2);
         System.out.println((1 << 31) - 1);
+
+        System.out.println(1 << 0);
     }
 
 }

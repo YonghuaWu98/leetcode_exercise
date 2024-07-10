@@ -186,4 +186,31 @@ public class BitwiseOperations {
         }
         return ans;
     }
+    /*
+     * todo 周赛 400 找到按位或最接近 k 的子数组
+    按位 &, | 可以做如下思考:
+    从集合的角度思考：
+        如果 a & b = a, 那说明 a 是 b 的子集, 两个集合进行 & 运算，与出来的集合将越来越小
+        如果 a | b = a, 则说明 b 是 a 的子集， 两个集合进行 | 运算，或出来的集合将越来越大
+    在本题中，如果 nums[j] | x == nums[j]， 那么 j 及其左侧所有数（集合）都不会被更新
+    一旦发现不变，则不用进行后续的或操作，内循环停止
+
+    **/
+    public int minimumDifference(int[] nums, int k) {
+        int n = nums.length;
+        int ans = Integer.MAX_VALUE;
+        for (int i = 0; i < n; i++) {
+            // 单个元素也是一个子数组
+            ans = Math.min(Math.abs(nums[i] - k), ans);
+
+            for (int j = i - 1; j >= 0; j--) { // 从右往左遍历，将 nums[j] | nums[i] 保存在 nums[j] 中
+                if ((nums[j] | nums[i]) == nums[j]) { // 如果 nums[j] | nums[i] == nums[j] 则停止遍历
+                    break;
+                }
+                nums[j] |= nums[i]; // 这一定会导致 nums[j] 变大
+                ans = Math.min(ans, Math.abs(nums[j] - k));
+            }
+        }
+        return ans;
+    }
 }

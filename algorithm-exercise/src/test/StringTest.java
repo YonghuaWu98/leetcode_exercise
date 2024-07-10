@@ -2,19 +2,21 @@ package test;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @Description TODO 测试String类的常用方法
  **/
 public class StringTest {
-    int a;
-    int b;
-
-    public StringTest(int a, int b) {
-        this.a = a;
-        this.b = b;
-    }
+//    int a;
+//    int b;
+//
+//    public StringTest(int a, int b) {
+//        this.a = a;
+//        this.b = b;
+//    }
 
     public static void main(String[] args) {
         /**
@@ -92,6 +94,5 @@ public class StringTest {
         }
         return ans;
     }
-
 
 }

@@ -1,4 +1,4 @@
-package test;
+package test.javaAPItest;
 
 import com.sun.xml.internal.ws.api.model.wsdl.WSDLOutput;
 
