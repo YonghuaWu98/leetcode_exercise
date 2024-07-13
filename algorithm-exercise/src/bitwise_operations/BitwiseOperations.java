@@ -213,4 +213,44 @@ public class BitwiseOperations {
         }
         return ans;
     }
+    @Test
+    public void testCanSortArray() {
+        int[] test1 = {8, 4 , 2, 30, 15};
+        canSortArray(test1);
+    }
+    /*
+     * leetcode 3011 判断一个数组是否可以变为有序
+     * @return: boolean
+     **/
+    public boolean canSortArray(int[] nums) {
+        int n = nums.length;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n - i - 1; j++) {
+                if (nums[j] <= nums[j + 1]) continue;
+                // 计算当前元素的二进制 1 的个数
+
+                int curOne = 0;
+                int cur = nums[j];
+                for (;cur > 0; cur >>= 1) {
+                    if ((cur & 1) != 0) {
+                        curOne++;
+                    }
+                }
+                // 计算后一个元素的二进制 1 的个数
+                int afterOne = 0;
+                int after = nums[j + 1];
+                for (; after > 0; after >>= 1) {
+                    if ((after & 1) != 0) {
+                        afterOne++;
+                    }
+                }
+                if (curOne != afterOne) return false;
+                int t = nums[j];
+                nums[j] = nums[j + 1];
+                nums[j + 1] = t;
+
+            }
+        }
+        return true;
+    }
 }
